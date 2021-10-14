@@ -1,9 +1,10 @@
 import React from "react";
+import Router from "../routing/Router";
 
 const Root = () => {
   return (
     <>
-      <h1>Root</h1>
+      <Router />
     </>
   );
 };
