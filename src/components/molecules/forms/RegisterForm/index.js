@@ -1,8 +1,11 @@
 import React from "react";
-import Button from "../../../atoms/Button";
-import Input from "../../../atoms/Input";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Button from "../../../atoms/Button";
+import Input from "../../../atoms/Input";
+// import { auth, usersCollection } from "../../../../firebase/config";
+import { auth } from "../../../../firebase/config";
 
 const registerFormValidSchema = Yup.object().shape({
   login: Yup.string()
@@ -27,11 +30,19 @@ const initialValues = {
 };
 
 const RegisterForm = () => {
+  // console.log(usersCollection);
+
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
         console.log(values);
+
+        createUserWithEmailAndPassword(auth, values.email, values.password)
+          .then((user) => {
+            console.log(user);
+          })
+          .catch((err) => console.log(err));
 
         resetForm();
       }}
