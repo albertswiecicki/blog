@@ -1,25 +1,24 @@
 import React from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../../../atoms/Button";
 import Input from "../../../atoms/Input";
-// import { auth, usersCollection } from "../../../../firebase/config";
-import { auth } from "../../../../firebase/config";
+// import { usersCollection } from "../../../../firebase/config";
+import { register } from "../../../../utils/Auth";
+import {
+  emailValidator,
+  loginValidator,
+  passwordValidator,
+  termsValidator,
+} from "../../../../utils/validation/Rules";
+
+// ToDo: require a different password than nick or email
 
 const registerFormValidSchema = Yup.object().shape({
-  login: Yup.string()
-    .required("Enter login")
-    .min(3, "Login must be at least 3 char"),
-  email: Yup.string().email("Invalid email").required("Enter email"),
-  password: Yup.string()
-    .required("Enter password")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-      "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number"
-    ),
-
-  acceptTerms: Yup.bool().oneOf([true], "You must accept the terms"),
+  login: loginValidator,
+  email: emailValidator,
+  password: passwordValidator,
+  acceptTerms: termsValidator,
 });
 
 const initialValues = {
@@ -28,22 +27,16 @@ const initialValues = {
   password: "",
   acceptTerms: false,
 };
-
+//ToDo transfer to the main page after registering
 const RegisterForm = () => {
-  // console.log(usersCollection);
-
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
         console.log(values);
-
-        createUserWithEmailAndPassword(auth, values.email, values.password)
-          .then((user) => {
-            console.log(user);
-          })
-          .catch((err) => console.log(err));
-
+        register(values.email, values.password);
+        // ToDo: store user nick
+        // console.log(usersCollection);
         resetForm();
       }}
       validationSchema={registerFormValidSchema}
@@ -56,6 +49,7 @@ const RegisterForm = () => {
             onChangeFn={handleChange}
             placeholder="login"
           />
+          {/* ToDo remove, it's here just to show how formatting works */}
           <div style={{ color: "yellow" }}>
             <ErrorMessage name="login" />
           </div>

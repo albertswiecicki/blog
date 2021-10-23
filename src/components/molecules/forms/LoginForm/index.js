@@ -3,23 +3,19 @@ import Button from "../../../atoms/Button";
 import Input from "../../../atoms/Input";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-export const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+import { login } from "../../../../utils/Auth";
+import {
+  emailValidator,
+  passwordValidator,
+} from "../../../../utils/validation/Rules";
 
 const loginFormValidSchema = Yup.object().shape({
-  login: Yup.string()
-    .required("Enter login")
-    .min(3, "Login must be at least 3 char"),
-  password: Yup.string()
-    .required("Enter password")
-    .matches(
-      regex,
-      "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number"
-    ),
+  email: emailValidator,
+  password: passwordValidator,
 });
 
 const initialValues = {
-  login: "",
+  email: "",
   password: "",
 };
 
@@ -29,6 +25,7 @@ const LoginForm = () => {
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
         console.log(values);
+        login(values.email, values.password);
         resetForm();
       }}
       validationSchema={loginFormValidSchema}
@@ -36,14 +33,13 @@ const LoginForm = () => {
       {({ values, handleChange }) => (
         <Form>
           <Input
-            name="login"
-            value={values.login}
+            name="email"
+            value={values.email}
+            type="email"
             onChangeFn={handleChange}
-            placeholder="login"
+            placeholder="email"
           />
-          <div style={{ color: "yellow" }}>
-            <ErrorMessage name="login" />
-          </div>
+          <ErrorMessage name="email" />
 
           <Input
             name="password"
