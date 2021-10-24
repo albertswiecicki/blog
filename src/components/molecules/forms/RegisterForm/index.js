@@ -3,7 +3,6 @@ import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "../../../atoms/Button";
 import Input from "../../../atoms/Input";
-// import { usersCollection } from "../../../../firebase/config";
 import { register } from "../../../../utils/Auth";
 import {
   emailValidator,
@@ -11,7 +10,6 @@ import {
   passwordValidator,
   termsValidator,
 } from "../../../../utils/validation/Rules";
-
 // ToDo: require a different password than nick or email
 
 const registerFormValidSchema = Yup.object().shape({
@@ -27,16 +25,16 @@ const initialValues = {
   password: "",
   acceptTerms: false,
 };
+
 //ToDo transfer to the main page after registering
+
 const RegisterForm = () => {
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
         console.log(values);
-        register(values.email, values.password);
-        // ToDo: store user nick
-        // console.log(usersCollection);
+        register(values.email, values.password, values.login, values.login);
         resetForm();
       }}
       validationSchema={registerFormValidSchema}

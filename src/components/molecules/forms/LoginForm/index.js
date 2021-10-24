@@ -3,7 +3,7 @@ import Button from "../../../atoms/Button";
 import Input from "../../../atoms/Input";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { login } from "../../../../utils/Auth";
+import { loginWithEmail } from "../../../../utils/Auth";
 import {
   emailValidator,
   passwordValidator,
@@ -25,7 +25,7 @@ const LoginForm = () => {
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
         console.log(values);
-        login(values.email, values.password);
+        loginWithEmail(values.email, values.password);
         resetForm();
       }}
       validationSchema={loginFormValidSchema}

@@ -2,7 +2,7 @@ import React from "react";
 import Router from "../routing/Router";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green, purple } from "@mui/material/colors";
-import Footer from "../components/molecules/Footer";
+import NavBar from "../components/molecules/NavBar";
 
 const mainTheme = createTheme({
   palette: {
@@ -21,7 +21,7 @@ const mainTheme = createTheme({
 const Root = () => {
   return (
     <ThemeProvider theme={mainTheme}>
-      <Footer />
+      <NavBar />
       <h1>Hello world</h1>
 
       <Router />
