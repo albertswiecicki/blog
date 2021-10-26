@@ -5,6 +5,7 @@ import Post from "../../molecules/Post";
 const Blog = () => {
   return (
     <div>
+      {/* posts.map(id => <col = 4> <Post postId=id/></col>) */}
       <Post postId={1234} />
     </div>
   );

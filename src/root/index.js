@@ -4,6 +4,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { green, purple } from "@mui/material/colors";
 import NavBar from "../components/molecules/NavBar";
 
+// here we will use effect -> downloading posts
+
 const mainTheme = createTheme({
   palette: {
     primary: {
