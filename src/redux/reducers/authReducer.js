@@ -1,16 +1,17 @@
 import { authActionTypes } from "../actions/actionTypes";
 
 const initialState = {
-  currentUser: {},
+  user: { email: "initial@state.email" },
 };
 
 const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case authActionTypes.SET_CURRENT_USER:
+      console.log("we encouterd dispatched action :)");
       return {
         ...state,
-        currentUser: payload,
+        user: payload,
       };
 
     default:
