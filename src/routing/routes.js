@@ -1,7 +1,9 @@
 export const routes = {
-  home: "/",
+  homePage: "/",
   registerPage: "/register",
   loginPage: "/login",
   blogPage: "/blog",
+  aboutMePage: "/about_me",
+  booksPage: "/books",
   // postPage: "/post",
 };
