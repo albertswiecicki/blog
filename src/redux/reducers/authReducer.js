@@ -1,7 +1,7 @@
 import { authActionTypes } from "../actions/actionTypes";
 
 const initialState = {
-  user: { email: "initial@state.email" },
+  user: { login: "initialLogin", email: "initial@state.email" },
 };
 
 const authReducer = (state = initialState, action) => {

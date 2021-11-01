@@ -20,7 +20,7 @@ const NavBar = () => {
       //logged in
       return (
         <>
-          <li className="topListItem">Hey {user.email}</li>
+          <li className="topListItem">Good to see you: {user.login}</li>
           <li className="topListItem">
             <Button onClickFn={logout}>Logout</Button>
           </li>
