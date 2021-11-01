@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { auth } from "../firebase/config";
 import { onAuthStateChanged } from "@firebase/auth";
 import { useEffect } from "react";
-import { loadUser } from "../redux/reducers/authReducer";
+import { loadUser } from "../redux/actions/authActions";
 
 const mainTheme = createTheme({
   palette: {
@@ -32,7 +32,9 @@ const Root = () => {
 
   return (
     <ThemeProvider theme={mainTheme}>
-      <Router />
+      <Router>
+        <h1>Hello world</h1>
+      </Router>
     </ThemeProvider>
   );
 };

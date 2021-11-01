@@ -7,19 +7,21 @@ import RegisterPage from "../views/RegisterPage";
 import { routes } from "./routes";
 import AboutMePage from "../views/AboutMePage";
 import BookPage from "../views/BooksPage";
+import HomePage from "../views/HomePage";
+import PostPage from "../views/PostPage";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route exact path={routes.homePage} />
+        <Route exact path={routes.homePage} component={HomePage} />
         <Route path={routes.registerPage} component={RegisterPage} />
         <Route path={routes.loginPage} component={LoginPage} />
         <Route path={routes.blogPage} component={BlogPage} />
         <Route path={routes.aboutMePage} component={AboutMePage} />
         <Route path={routes.booksPage} component={BookPage} />
-        {/* <Route path={routes.postPage + "/:postId"} component={Post} /> */}
+        <Route path={routes.postPage + "/:postId"} component={PostPage} />
       </Switch>
     </BrowserRouter>
   );

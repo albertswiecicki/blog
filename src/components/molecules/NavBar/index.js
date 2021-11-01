@@ -45,6 +45,11 @@ const NavBar = () => {
     <div className="top">
       <ul className="topList">
         <li className="topListItem">
+          <NavLink activeClassName="activeLink" to={routes.homePage}>
+            <Button>Home Page</Button>
+          </NavLink>
+        </li>
+        <li className="topListItem">
           <NavLink activeClassName="activeLink" to={routes.blogPage}>
             <Button>Blog</Button>
           </NavLink>

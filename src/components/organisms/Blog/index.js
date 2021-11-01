@@ -1,13 +1,32 @@
 import React from "react";
 import Post from "../../molecules/Post";
+import { useSelector } from "react-redux";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
-// it will be based on material ui grid system
+// on bigger screens (ultrawide) we might add some padding on sides
 const Blog = () => {
+  const posts = useSelector(({ blog }) => blog.posts);
+
   return (
-    <div>
-      {/* posts.map(id => <col = 4> <Post postId=id/></col>) */}
-      <Post postId={1234} />
-    </div>
+    <Box
+      sx={{
+        flexGrow: 1,
+        // display: "flex",
+        // justifyContent: "center",
+        // alignItems: "center",
+      }}
+    >
+      <Grid container spacing={2}>
+        {posts.map((post, idx) => (
+          <>
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
+              <Post post={post} />
+            </Grid>
+          </>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

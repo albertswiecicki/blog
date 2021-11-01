@@ -5,5 +5,5 @@ export const routes = {
   blogPage: "/blog",
   aboutMePage: "/about_me",
   booksPage: "/books",
-  // postPage: "/post",
+  postPage: "/post",
 };
