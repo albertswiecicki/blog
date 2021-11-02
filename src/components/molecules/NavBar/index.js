@@ -1,73 +1,50 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import FacebookIcon from "@mui/icons-material/Facebook";
 import { routes } from "../../../routing/routes";
-import { useSelector } from "react-redux";
-import Button from "../../atoms/Button";
-import { logout } from "../../../utils/Auth";
-import "./index.css";
+import { useHistory } from "react-router-dom";
 
-// ToDo
-// Do we want Buttons / Navlinks / (combined?)
-// or smth different form material ui
+// const useStyles = styled((theme) => ({
+//   links: {
+//     flexGrow: 1,
+//     textAlign: "center",
+//   },
+// }));
 
-// ToDo
-// add links to social media
-
-const NavBar = () => {
-  const user = useSelector(({ auth }) => auth.user);
-  const getUserPanel = () => {
-    if (user && Object.keys(user).length !== 0) {
-      //logged in
-      return (
-        <>
-          <li className="topListItem">Good to see you: {user.login}</li>
-          <li className="topListItem">
-            <Button onClickFn={logout}>Logout</Button>
-          </li>
-        </>
-      );
-    }
-    return (
-      <>
-        <li className="topListItem">
-          <NavLink to={routes.loginPage}>
-            <Button>Login </Button>
-          </NavLink>
-        </li>
-        <li className="topListItem">
-          <NavLink to={routes.registerPage}> Register </NavLink>
-        </li>
-      </>
-    );
-  };
-
+export default function NavBar() {
+  //   const classes = useStyles();
+  let history = useHistory();
   return (
-    <div className="top">
-      <ul className="topList">
-        <li className="topListItem">
-          <NavLink activeClassName="activeLink" to={routes.homePage}>
-            <Button>Home Page</Button>
-          </NavLink>
-        </li>
-        <li className="topListItem">
-          <NavLink activeClassName="activeLink" to={routes.blogPage}>
-            <Button>Blog</Button>
-          </NavLink>
-        </li>
-        <li className="topListItem">
-          <NavLink activeClassName="activeLink" to={routes.booksPage}>
-            Books
-          </NavLink>
-        </li>
-        <li className="topListItem">
-          <NavLink activeClassName="activeLink" to={routes.aboutMePage}>
-            About me
-          </NavLink>
-        </li>
-        {getUserPanel()}
-      </ul>
-    </div>
-  );
-};
+    <AppBar position="sticky">
+      <Toolbar>
+        {/* <IconButton edge="start" aria-label="menu">
+          <MenuIcon />
+        </IconButton> */}
 
-export default NavBar;
+        {/* <Typography className={classes.links}> */}
+        <Typography sx={{ flexGrow: 1, textAlign: "center" }}>
+          <IconButton
+            color="inherit"
+            onClick={() => history.push(routes.blogPage)}
+          >
+            Blog
+          </IconButton>
+          <IconButton
+            color="inherit"
+            onClick={() => history.push(routes.homePage)}
+          >
+            Home
+          </IconButton>
+        </Typography>
+
+        <IconButton edge="end">
+          <FacebookIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+  );
+}
