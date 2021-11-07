@@ -39,6 +39,12 @@ export default function NavBar() {
           >
             Home
           </IconButton>
+          <IconButton
+            color="inherit"
+            onClick={() => history.push(routes.addPostPage)}
+          >
+            Add Post
+          </IconButton>
         </Typography>
 
         <IconButton edge="end">

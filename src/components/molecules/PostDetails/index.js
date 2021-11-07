@@ -8,8 +8,10 @@ const PostDetails = ({ post }) => {
   }
   return (
     <>
-      <h1>PostDetails Page :) for post {post.id}</h1>
-      <h3>{parse(post.body)}</h3>
+      <h1>PostDetails page for post with id: {post.id}</h1>
+      <img src={post.imageUrl} alt={post.imageAlt} />
+      <br />
+      {parse(post.body)}
     </>
   );
 };

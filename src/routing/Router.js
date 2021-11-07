@@ -9,6 +9,7 @@ import AboutMePage from "../views/AboutMePage";
 import BookPage from "../views/BooksPage";
 import HomePage from "../views/HomePage";
 import PostPage from "../views/PostPage";
+import AddPostPage from "../views/AddPostPage";
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path={routes.loginPage} component={LoginPage} />
         <Route path={routes.blogPage} component={BlogPage} />
         <Route path={routes.aboutMePage} component={AboutMePage} />
+        <Route path={routes.addPostPage} component={AddPostPage} />
         <Route path={routes.booksPage} component={BookPage} />
         <Route path={routes.postPage + "/:postId"} component={PostPage} />
       </Switch>

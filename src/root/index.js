@@ -7,6 +7,7 @@ import { auth } from "../firebase/config";
 import { onAuthStateChanged } from "@firebase/auth";
 import { useEffect } from "react";
 import { loadUser } from "../redux/actions/authActions";
+import { loadPosts } from "../redux/actions/blogActions";
 
 const mainTheme = createTheme({
   palette: {
@@ -28,6 +29,7 @@ const Root = () => {
     onAuthStateChanged(auth, (currentUser) => {
       dispatch(loadUser(currentUser));
     });
+    dispatch(loadPosts());
   }, [dispatch]);
 
   return (

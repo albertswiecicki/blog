@@ -18,11 +18,13 @@ const Post = ({ post }) => {
   const redirectToDetailPage = () => {
     history.push(`${routes.postPage}/${post.id}`);
   };
-
   return (
     <Card sx={{ maxWidth: 500 }}>
       <CardActionArea onClick={redirectToDetailPage}>
-        <CardHeader title={post.title} subheader={post.date} />
+        <CardHeader
+          title={post.title}
+          subheader={new Date(post.createdAt.seconds * 1000).toDateString()}
+        />
         <CardMedia
           component="img"
           height="194"
