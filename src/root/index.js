@@ -11,12 +11,12 @@ import { loadPosts } from "../redux/actions/blogActions";
 
 const mainTheme = createTheme({
   palette: {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: green[500],
-    },
+    // primary: {
+    //   main: purple[500],
+    // },
+    // secondary: {
+    //   main: green[500],
+    // },
   },
   typography: {
     // fontFamily: "Quicksand",
@@ -34,6 +34,8 @@ const Root = () => {
 
   return (
     <ThemeProvider theme={mainTheme}>
+      {/* <h1>Process env: {process.env.NODE_ENV}</h1>
+      <h1>env test : {process.env.REACT_APP_TEST_V}</h1> */}
       <Router>
         <h1>Hello world</h1>
       </Router>

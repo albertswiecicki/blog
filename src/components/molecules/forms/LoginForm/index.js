@@ -1,6 +1,5 @@
 import React from "react";
-import Button from "../../../atoms/Button";
-import Input from "../../../atoms/Input";
+import { Button } from "@mui/material";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { loginWithEmail } from "../../../../utils/Auth";
@@ -8,6 +7,7 @@ import {
   emailValidator,
   passwordValidator,
 } from "../../../../utils/validation/Rules";
+import { TextField } from "@mui/material";
 
 const loginFormValidSchema = Yup.object().shape({
   email: emailValidator,
@@ -27,26 +27,31 @@ const LoginForm = () => {
         console.log(values);
         loginWithEmail(values.email, values.password);
         resetForm();
+        // Add notification about successfull login
       }}
       validationSchema={loginFormValidSchema}
     >
       {({ values, handleChange }) => (
         <Form>
-          <Input
+          <TextField
+            id="outlined-basic"
+            label="email"
+            variant="outlined"
             name="email"
             value={values.email}
-            type="email"
-            onChangeFn={handleChange}
-            placeholder="email"
+            onChange={handleChange}
           />
+
           <ErrorMessage name="email" />
 
-          <Input
+          <TextField
+            id="outlined-basic"
+            label="password"
+            variant="outlined"
             name="password"
-            value={values.password}
             type="password"
-            onChangeFn={handleChange}
-            placeholder="password"
+            value={values.password}
+            onChange={handleChange}
           />
           <ErrorMessage name="password" />
 

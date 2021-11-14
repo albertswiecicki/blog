@@ -11,6 +11,7 @@ export const loadUser = (currentUser) => async (dispatch, getState) => {
   if (currentUser) {
     const userData = await getUserData(currentUser.uid);
     currentUser.login = userData.login;
+    currentUser.isAdmin = userData.isAdmin;
   }
   dispatch(setCurrentUser(currentUser));
 };

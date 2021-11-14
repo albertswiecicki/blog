@@ -7,4 +7,5 @@ export const routes = {
   booksPage: "/books",
   postPage: "/post",
   addPostPage: "/add_post",
+  doesntExistPage: "/doesnt_exist",
 };

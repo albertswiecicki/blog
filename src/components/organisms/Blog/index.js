@@ -19,11 +19,9 @@ const Blog = () => {
     >
       <Grid container spacing={2}>
         {posts.map((post, idx) => (
-          <>
-            <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
-              <Post post={post} />
-            </Grid>
-          </>
+          <Grid item xs={12} sm={6} md={4} lg={4} xl={3} key={idx}>
+            <Post post={post} key={idx} />
+          </Grid>
         ))}
       </Grid>
     </Box>

@@ -10,6 +10,7 @@ import BookPage from "../views/BooksPage";
 import HomePage from "../views/HomePage";
 import PostPage from "../views/PostPage";
 import AddPostPage from "../views/AddPostPage";
+import DoesntExistPage from "../views/DoesntExistPage";
 
 const Router = () => {
   return (
@@ -24,6 +25,8 @@ const Router = () => {
         <Route path={routes.addPostPage} component={AddPostPage} />
         <Route path={routes.booksPage} component={BookPage} />
         <Route path={routes.postPage + "/:postId"} component={PostPage} />
+        <Route path={routes.doesntExistPage} component={DoesntExistPage} />
+        <Route path={"/"} component={DoesntExistPage} />
       </Switch>
     </BrowserRouter>
   );

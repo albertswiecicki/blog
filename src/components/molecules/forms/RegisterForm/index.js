@@ -1,9 +1,11 @@
 import React from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Button from "../../../atoms/Button";
-import Input from "../../../atoms/Input";
+import { Button } from "@mui/material";
+import { TextField } from "@mui/material";
 import { register } from "../../../../utils/Auth";
+import Checkbox from "@mui/material/Checkbox";
+
 import {
   emailValidator,
   loginValidator,
@@ -11,6 +13,9 @@ import {
   termsValidator,
 } from "../../../../utils/validation/Rules";
 // ToDo: require a different password than nick or email
+
+// ToDo: rewrite errors according to:
+// https://formik.org/docs/examples/with-material-ui
 
 const registerFormValidSchema = Yup.object().shape({
   login: loginValidator,
@@ -41,40 +46,52 @@ const RegisterForm = () => {
     >
       {({ values, handleChange }) => (
         <Form>
-          <Input
+          <TextField
+            id="outlined-basic"
+            label="login"
+            variant="outlined"
             name="login"
             value={values.login}
-            onChangeFn={handleChange}
-            placeholder="login"
+            onChange={handleChange}
           />
+
           {/* ToDo remove, it's here just to show how formatting works */}
           <div style={{ color: "yellow" }}>
             <ErrorMessage name="login" />
           </div>
-          <Input
+
+          <TextField
+            id="outlined-basic"
+            label="email"
+            variant="outlined"
             name="email"
             value={values.email}
-            type="email"
-            onChangeFn={handleChange}
-            placeholder="email"
+            onChange={handleChange}
+            // error={touched.email && Boolean(errors.email)}
+            // helperText={touched.email && errors.email}
           />
+
           <ErrorMessage name="email" />
 
-          <Input
+          <TextField
+            id="outlined-basic"
+            label="password"
+            variant="outlined"
             name="password"
-            value={values.password}
             type="password"
-            onChangeFn={handleChange}
-            placeholder="password"
+            value={values.password}
+            onChange={handleChange}
           />
+
           <ErrorMessage name="password" />
 
-          <Input
+          <Checkbox
             name="acceptTerms"
             value={values.acceptTerms}
             type="checkbox"
-            onChangeFn={handleChange}
+            onChange={handleChange}
           />
+
           <ErrorMessage name="acceptTerms" />
 
           <Button type="submit">Register</Button>

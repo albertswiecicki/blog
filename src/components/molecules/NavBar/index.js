@@ -2,54 +2,93 @@ import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
+import { Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import { routes } from "../../../routing/routes";
 import { useHistory } from "react-router-dom";
-
-// const useStyles = styled((theme) => ({
-//   links: {
-//     flexGrow: 1,
-//     textAlign: "center",
-//   },
-// }));
+import { useSelector } from "react-redux";
+import { logout } from "../../../utils/Auth";
 
 export default function NavBar() {
-  //   const classes = useStyles();
+  const user = useSelector(({ auth }) => auth.user);
   let history = useHistory();
-  return (
-    <AppBar position="sticky">
-      <Toolbar>
-        {/* <IconButton edge="start" aria-label="menu">
-          <MenuIcon />
-        </IconButton> */}
 
-        {/* <Typography className={classes.links}> */}
-        <Typography sx={{ flexGrow: 1, textAlign: "center" }}>
-          <IconButton
-            color="inherit"
-            onClick={() => history.push(routes.blogPage)}
-          >
-            Blog
-          </IconButton>
-          <IconButton
-            color="inherit"
-            onClick={() => history.push(routes.homePage)}
-          >
-            Home
-          </IconButton>
-          <IconButton
+  const getAdminPanel = () => {
+    if (user && user.isAdmin === true) {
+      return (
+        <>
+          <Button
             color="inherit"
             onClick={() => history.push(routes.addPostPage)}
           >
             Add Post
-          </IconButton>
-        </Typography>
+          </Button>
+        </>
+      );
+    }
+    return <></>;
+  };
 
-        <IconButton edge="end">
-          <FacebookIcon />
-        </IconButton>
+  const getLoginLogout = () => {
+    if (user) {
+      return (
+        <>
+          {user.login}
+          <Button color="inherit" onClick={logout} edge="end">
+            logout
+          </Button>
+        </>
+      );
+    }
+    return (
+      <>
+        <Button
+          color="inherit"
+          onClick={() => history.push(routes.loginPage)}
+          edge="end"
+        >
+          login
+        </Button>
+        <Button
+          color="inherit"
+          onClick={() => history.push(routes.registerPage)}
+          edge="end"
+        >
+          register
+        </Button>
+      </>
+    );
+  };
+
+  return (
+    <AppBar position="sticky">
+      <Toolbar>
+        <a
+          href="https://www.facebook.com/albert.swiecicki"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FacebookIcon sx={{ m: 1 }} />
+        </a>
+        <a
+          href="https://www.instagram.com/albert_swiecicki/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <InstagramIcon sx={{ m: 1 }} />
+        </a>
+        <Typography sx={{ flexGrow: 1, textAlign: "center" }}>
+          <Button color="inherit" onClick={() => history.push(routes.blogPage)}>
+            Blog
+          </Button>
+          <Button color="inherit" onClick={() => history.push(routes.homePage)}>
+            Home
+          </Button>
+          {getAdminPanel()}
+        </Typography>
+        {getLoginLogout()}
       </Toolbar>
     </AppBar>
   );

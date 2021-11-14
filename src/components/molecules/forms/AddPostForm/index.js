@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
-// import * as Yup from "yup";
-import Button from "../../../atoms/Button";
-import Input from "../../../atoms/Input";
 import PostDetails from "../../PostDetails";
+import { uploadPost } from "../../../../firestore";
+import { TextField } from "@mui/material";
+import { useSelector } from "react-redux";
+import { routes } from "../../../../routing/routes";
+import { useHistory } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Button } from "@mui/material";
 
 const initialValues = {
   title: "",
@@ -14,10 +22,23 @@ const initialValues = {
 };
 
 const AddPostForm = () => {
-  const [post, setPost] = useState(initialValues);
-  const uploadPost = () => {
-    console.log("dbg uploading post: ", post);
+  const [postPreview, setPostPreview] = useState(initialValues);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const user = useSelector(({ auth }) => auth.user);
+  let history = useHistory();
+  if (!user || user.isAdmin !== true) {
+    history.push(routes.doesntExistPage);
+  }
 
   return (
     <>
@@ -25,54 +46,95 @@ const AddPostForm = () => {
         initialValues={initialValues}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
-          setPost({
+          setPostPreview({
             ...values,
             createdAt: { seconds: new Date().getTime() / 1000 },
             id: "preview_test_id",
           });
           console.log("the post preview should refreash");
-
-          // AddNewPost / PushNewPost
-          //   resetForm();
         }}
       >
         {({ values, handleChange }) => (
           <Form>
-            <Input
+            <TextField
+              id="outlined-basic"
+              label="Blog title"
+              variant="outlined"
               name="title"
               value={values.title}
-              onChangeFn={handleChange}
-              placeholder="title"
-            />
-            <Input
-              name="body"
-              value={values.body}
-              onChangeFn={handleChange}
-              placeholder="body"
+              onChange={handleChange}
             />
 
-            <Input
+            <TextField
+              id="outlined-basic"
+              label="imageUrl"
+              variant="outlined"
               name="imageUrl"
               value={values.imageUrl}
-              onChangeFn={handleChange}
-              placeholder="imgageUrl"
+              onChange={handleChange}
             />
 
-            <Input
+            <TextField
+              id="outlined-basic"
+              label="imageAlt"
+              variant="outlined"
               name="imageAlt"
               value={values.imageAlt}
-              onChangeFn={handleChange}
+              onChange={handleChange}
             />
 
+            <TextField
+              name="body"
+              value={values.body}
+              onChange={handleChange}
+              placeholder="body"
+              // id="outlined-multiline-static"
+              // label="Multiline"
+              multiline
+              rows={12}
+              // defaultValue="123 Value"
+            />
             <Button type="submit">Preview</Button>
           </Form>
         )}
       </Formik>
-      <PostDetails post={post} />
 
-      <Button type="submit" onClickFn={uploadPost}>
-        Post
-      </Button>
+      {postPreview.title !== "" ? (
+        <>
+          <PostDetails post={postPreview} />
+          <Button
+            type="submit"
+            onClick={() => {
+              uploadPost(postPreview);
+              handleClickOpen();
+            }}
+          >
+            Post
+          </Button>
+        </>
+      ) : (
+        <></>
+      )}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Your post has been sent"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Your post has been successfully posted!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

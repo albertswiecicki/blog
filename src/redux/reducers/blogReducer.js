@@ -11,7 +11,6 @@ import { blogActionTypes } from "../actions/actionTypes";
 const postTemplate = {
   id: "123456",
   title: "post title here",
-  // date: "September 14, 2016",
   imageUrl: "https://picsum.photos/200",
   imageAlt: "alt image text here",
   body: "this is a text from the post body, <h1>it supports html syntax </h1>, <img src=https://picsum.photos/200>",
@@ -19,8 +18,8 @@ const postTemplate = {
   updatedAt: null, //  null or date
   createdBy: "Albert", // currently
   likes: [], // nicks of everybody who liked the post (only logins)
-  favoirtes: [], // // nicks of everybody who favorited the post (only logins)
-  anonymus_likes: [], // counter of anonymous likes
+  favorites: [], // // nicks of everybody who favorited the post (only logins)
+  anonymus_likes: 0, // counter of anonymous likes
   can_be_accessed_by_id: true, // true / false (can be accessed by id)
   displayed_by_default: true, // is displayed by default in the default blog section
   tags: [], // tags to filter by
@@ -46,7 +45,7 @@ const blogReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case blogActionTypes.SET_POSTS:
-      return { posts: [...state.posts, ...payload] };
+      return { posts: [...payload] };
     // return { posts: payload };
     // return { posts: state.posts };
 
