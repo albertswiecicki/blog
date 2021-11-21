@@ -4,10 +4,10 @@ import parse from "html-react-parser";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@emotion/react";
+import { Box } from "@mui/system";
 
 const PostDetails = ({ post }) => {
   const theme = useTheme();
-  console.log("created at", post.createdAt);
 
   const sx = {
     page: {
@@ -21,9 +21,11 @@ const PostDetails = ({ post }) => {
       color: theme.palette.primary.dark,
     },
     image: {
+      maxWidth: "100%",
       display: "flex",
       justifyContent: "center",
       color: "#550055",
+      maxWidth: "1",
     },
   };
 
@@ -35,10 +37,14 @@ const PostDetails = ({ post }) => {
       <Typography sx={sx.title}>
         <h1>{post.title}</h1>
       </Typography>
-
-      <Typography sx={sx.image}>
-        <img src={post.imageUrl} alt={post.imageAlt} />
-      </Typography>
+      <Box
+        component="img"
+        src={post.imageUrl}
+        alt={post.imageAlt}
+        // sx={{ maxWidth: { xs: "100%", md: 250 } }}
+        // sx={{ maxWidth: "100%" }}
+        sx={sx.image}
+      ></Box>
       <br />
       {parse(post.body)}
     </Container>
