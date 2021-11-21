@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import PostDetails from "../../PostDetails";
 import { uploadPost } from "../../../../firestore";
@@ -12,6 +12,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
+import { Prompt } from "react-router";
 
 const initialValues = {
   title: "",
@@ -23,8 +24,17 @@ const initialValues = {
 
 const AddPostForm = () => {
   const [postPreview, setPostPreview] = useState(initialValues);
+  const [shouldBlockNavigation, setShouldBlockNavigation] = useState(false);
 
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (shouldBlockNavigation) {
+      window.onbeforeunload = () => true;
+    } else {
+      window.onbeforeunload = undefined;
+    }
+  }, [shouldBlockNavigation]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -42,6 +52,10 @@ const AddPostForm = () => {
 
   return (
     <>
+      <Prompt
+        when={shouldBlockNavigation}
+        message="You have unsaved changes, are you sure you want to leave?"
+      />
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { resetForm }) => {
@@ -51,7 +65,7 @@ const AddPostForm = () => {
             createdAt: { seconds: new Date().getTime() / 1000 },
             id: "preview_test_id",
           });
-          console.log("the post preview should refreash");
+          setShouldBlockNavigation(true);
         }}
       >
         {({ values, handleChange }) => (
@@ -98,7 +112,6 @@ const AddPostForm = () => {
           </Form>
         )}
       </Formik>
-
       {postPreview.title !== "" ? (
         <>
           <PostDetails post={postPreview} />
@@ -106,6 +119,7 @@ const AddPostForm = () => {
             type="submit"
             onClick={() => {
               uploadPost(postPreview);
+              setShouldBlockNavigation(false);
               handleClickOpen();
             }}
           >
