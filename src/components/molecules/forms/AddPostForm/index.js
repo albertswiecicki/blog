@@ -13,6 +13,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
 import ReroutingPrevention from "../../ReroutingPrevention";
+import AddImagesForm from "../AddImagesForm";
 
 const initialValues = {
   title: "",
@@ -45,6 +46,7 @@ const AddPostForm = () => {
   return (
     <>
       <ReroutingPrevention shouldBlockNavigation={shouldBlockNavigation} />
+      <AddImagesForm />
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { resetForm }) => {
