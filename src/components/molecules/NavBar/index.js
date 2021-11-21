@@ -10,11 +10,12 @@ import { routes } from "../../../routing/routes";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { logout } from "../../../utils/Auth";
+import { useTheme } from "@emotion/react";
 
 export default function NavBar() {
   const user = useSelector(({ auth }) => auth.user);
   let history = useHistory();
-
+  const theme = useTheme();
   const getAdminPanel = () => {
     if (user && user.isAdmin === true) {
       return (
@@ -70,14 +71,14 @@ export default function NavBar() {
           target="_blank"
           rel="noreferrer"
         >
-          <FacebookIcon sx={{ m: 1 }} />
+          <FacebookIcon sx={{ m: 1, fill: theme.palette.primary.light }} />
         </a>
         <a
           href="https://www.instagram.com/albert_swiecicki/"
           target="_blank"
           rel="noreferrer"
         >
-          <InstagramIcon sx={{ m: 1 }} />
+          <InstagramIcon sx={{ m: 1, fill: theme.palette.primary.light }} />
         </a>
         <Typography sx={{ flexGrow: 1, textAlign: "center" }}>
           <Button color="inherit" onClick={() => history.push(routes.blogPage)}>

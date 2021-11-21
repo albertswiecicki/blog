@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../components/atoms/Button";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { routes } from "../../routing/routes";
 

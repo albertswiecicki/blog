@@ -6,7 +6,10 @@ import Grid from "@mui/material/Grid";
 
 // on bigger screens (ultrawide) we might add some padding on sides
 const Blog = () => {
-  const posts = useSelector(({ blog }) => blog.posts);
+  const posts = useSelector(({ blog }) => blog.posts).sort(
+    (first, second) =>
+      parseFloat(second.createdAt.seconds) - parseFloat(first.createdAt.seconds)
+  );
 
   return (
     <Box
