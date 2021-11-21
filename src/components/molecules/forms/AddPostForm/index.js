@@ -14,7 +14,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Button } from "@mui/material";
 import ReroutingPrevention from "../../ReroutingPrevention";
 import AddImagesForm from "../AddImagesForm";
-
+import { Container } from "@mui/material";
 const initialValues = {
   title: "",
   body: "",
@@ -60,47 +60,53 @@ const AddPostForm = () => {
         }}
       >
         {({ values, handleChange }) => (
-          <Form>
-            <TextField
-              id="outlined-basic"
-              label="Blog title"
-              variant="outlined"
-              name="title"
-              value={values.title}
-              onChange={handleChange}
-            />
+          <Container sx={{ display: "flex", justifyContent: "center" }}>
+            <Form>
+              <TextField
+                id="outlined-basic"
+                label="Blog title"
+                variant="outlined"
+                name="title"
+                value={values.title}
+                onChange={handleChange}
+                sx={{ width: "100%" }}
+              />
 
-            <TextField
-              id="outlined-basic"
-              label="imageUrl"
-              variant="outlined"
-              name="imageUrl"
-              value={values.imageUrl}
-              onChange={handleChange}
-            />
+              <TextField
+                id="outlined-basic"
+                label="imageUrl"
+                variant="outlined"
+                name="imageUrl"
+                value={values.imageUrl}
+                onChange={handleChange}
+                sx={{ width: "100%" }}
+              />
 
-            <TextField
-              id="outlined-basic"
-              label="imageAlt"
-              variant="outlined"
-              name="imageAlt"
-              value={values.imageAlt}
-              onChange={handleChange}
-            />
+              <TextField
+                id="outlined-basic"
+                label="imageAlt"
+                variant="outlined"
+                name="imageAlt"
+                value={values.imageAlt}
+                onChange={handleChange}
+                sx={{ width: "100%" }}
+              />
 
-            <TextField
-              name="body"
-              value={values.body}
-              onChange={handleChange}
-              placeholder="body"
-              // id="outlined-multiline-static"
-              // label="Multiline"
-              multiline
-              rows={12}
-              // defaultValue="123 Value"
-            />
-            <Button type="submit">Preview</Button>
-          </Form>
+              <TextField
+                name="body"
+                value={values.body}
+                onChange={handleChange}
+                placeholder="body"
+                // id="outlined-multiline-static"
+                // label="Multiline"
+                multiline
+                rows={22}
+                sx={{ width: "100%" }}
+                // defaultValue="123 Value"
+              />
+              <Button type="submit">Preview</Button>
+            </Form>
+          </Container>
         )}
       </Formik>
       {postPreview.title !== "" ? (

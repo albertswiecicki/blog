@@ -34,8 +34,8 @@ const PostDetails = ({ post }) => {
   }
   return (
     <Container sx={sx.page}>
-      <Typography sx={sx.title}>
-        <h1>{post.title}</h1>
+      <Typography variant="h2" sx={sx.title}>
+        {post.title}
       </Typography>
       <Box
         component="img"

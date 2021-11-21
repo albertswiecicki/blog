@@ -48,9 +48,7 @@ const AddImagesForm = () => {
           return (
             <li key={image.alt}>
               <img width="100" height="100" src={image.url} alt={image.alt} />
-              <p>
-                alt: {image.alt} url: {image.url}
-              </p>
+              alt: {image.alt} url: {image.url}
             </li>
           );
         })}

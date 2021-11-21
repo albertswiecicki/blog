@@ -54,12 +54,10 @@ const RegisterForm = () => {
             value={values.login}
             onChange={handleChange}
           />
-
           {/* ToDo remove, it's here just to show how formatting works */}
           <div style={{ color: "yellow" }}>
             <ErrorMessage name="login" />
           </div>
-
           <TextField
             id="outlined-basic"
             label="email"
@@ -70,9 +68,7 @@ const RegisterForm = () => {
             // error={touched.email && Boolean(errors.email)}
             // helperText={touched.email && errors.email}
           />
-
           <ErrorMessage name="email" />
-
           <TextField
             id="outlined-basic"
             label="password"
@@ -82,18 +78,15 @@ const RegisterForm = () => {
             value={values.password}
             onChange={handleChange}
           />
-
           <ErrorMessage name="password" />
-
+          I accept terms
           <Checkbox
             name="acceptTerms"
             value={values.acceptTerms}
             type="checkbox"
             onChange={handleChange}
           />
-
           <ErrorMessage name="acceptTerms" />
-
           <Button type="submit">Register</Button>
         </Form>
       )}
